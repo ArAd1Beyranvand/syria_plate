@@ -12,7 +12,7 @@ void main() {
   test('one AANES car and motorcycle spec per region', () {
     expect(SyriaPlates.aanesByRegion.length, AanesRegion.values.length);
     expect(SyriaPlates.motorcycleByRegion.length, AanesRegion.values.length);
-    expect(SyriaPlates.aanes(AanesRegion.qamishli).mirrors.length, 6);
+    expect(SyriaPlates.aanes(AanesRegion.qamishli).mirrors.length, 1);
   });
 
   test('only the Jazira districts with a Syriac name are trilingual', () {

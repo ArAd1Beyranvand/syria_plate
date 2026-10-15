@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -90,6 +92,22 @@ abstract final class SyriaPlates {
   /// face under this name, or the row falls back to whatever has the glyphs.
   static const String syriacFont = 'Noto Sans Syriac';
 
+  /// One field of [count] cells at [pitch] from [left]; `spacing` brings the
+  /// font's advance up to the pitch.
+  static PlateSlot _run(
+    PlateAlphabet alphabet,
+    int count,
+    double left,
+    double top,
+    double pitch,
+    double height,
+  ) => PlateSlot(
+    alphabet: alphabet,
+    box: PlateBox(left, top, count * pitch, height),
+    length: count,
+    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  );
+
   static const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 0, 1));
 
   static PlateLabel _label(
@@ -142,21 +160,21 @@ abstract final class SyriaPlates {
         PlatePart(PlateSection.plain),
       ]),
       slots: <PlateSlot>[
-        ...plateRegister(
-          alphabet: SyriaAlphabets.digits,
-          count: 2,
-          left: _Transitional.codeLeft,
-          top: 0,
-          width: _Transitional.pitch,
-          height: _Transitional.height,
+        _run(
+          SyriaAlphabets.digits,
+          2,
+          _Transitional.codeLeft,
+          0,
+          _Transitional.pitch,
+          _Transitional.height,
         ),
-        ...plateRegister(
-          alphabet: SyriaAlphabets.digits,
-          count: 5,
-          left: _Transitional.serialLeft,
-          top: 0,
-          width: _Transitional.pitch,
-          height: _Transitional.height,
+        _run(
+          SyriaAlphabets.digits,
+          5,
+          _Transitional.serialLeft,
+          0,
+          _Transitional.pitch,
+          _Transitional.height,
         ),
       ],
       labels: <PlateLabel>[
@@ -187,8 +205,8 @@ abstract final class SyriaPlates {
         ),
       ],
       textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1], key: 'code'),
-        PlateTextGroup(<int>[2, 3, 4, 5, 6], key: 'serial'),
+        PlateTextGroup(<int>[0], key: 'code'),
+        PlateTextGroup(<int>[1], key: 'serial'),
       ],
     );
   }();
@@ -248,23 +266,17 @@ abstract final class SyriaPlates {
           ]),
         ),
       ]),
-      slots: plateRegister(
-        alphabet: SyriaAlphabets.digits,
-        count: 6,
-        left: _Aanes.digitLeft,
-        top: 0,
-        width: _Aanes.pitch,
-        height: 61,
-      ),
-      mirrors: plateEcho(
-        sources: const <int>[0, 1, 2, 3, 4, 5],
-        alphabet: SyriaAlphabets.easternDigits,
-        left: _Aanes.digitLeft,
-        top: 58.7,
-        width: _Aanes.pitch,
-        height: 59,
-        glyphHeight: 70,
-      ),
+      slots: <PlateSlot>[
+        _run(SyriaAlphabets.digits, 6, _Aanes.digitLeft, 0, _Aanes.pitch, 61),
+      ],
+      mirrors: const <PlateMirror>[
+        PlateMirror(
+          source: 0,
+          box: PlateBox(_Aanes.digitLeft, 58.7, 6 * _Aanes.pitch, 59),
+          glyphHeight: 70,
+          alphabet: SyriaAlphabets.easternDigits,
+        ),
+      ],
       labels: <PlateLabel>[
         ..._stack(_Aanes.syrX, 'S', 'Y', 'R'),
         ..._stack(_Aanes.bsX, 'B', _Aanes.sun, 'S'),
@@ -286,7 +298,7 @@ abstract final class SyriaPlates {
         ],
       ],
       textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1, 2, 3, 4, 5], key: 'serial'),
+        PlateTextGroup(<int>[0], key: 'serial'),
       ],
     );
   }
@@ -321,14 +333,7 @@ abstract final class SyriaPlates {
           alphabet: SyriaAlphabets.letters,
           box: PlateBox(71, 69.5, 34, 43),
         ),
-        ...plateRegister(
-          alphabet: SyriaAlphabets.digits,
-          count: 4,
-          left: 108.6,
-          top: 62,
-          width: _Moto.pitch,
-          height: 58,
-        ),
+        _run(SyriaAlphabets.digits, 4, 108.6, 62, _Moto.pitch, 58),
       ],
       labels: <PlateLabel>[
         ..._stack(_Moto.bsX, 'B', _Aanes.sun, 'S'),
@@ -337,7 +342,7 @@ abstract final class SyriaPlates {
       ],
       textGroups: const <PlateTextGroup>[
         PlateTextGroup(<int>[0], key: 'letter'),
-        PlateTextGroup(<int>[1, 2, 3, 4], key: 'serial'),
+        PlateTextGroup(<int>[1], key: 'serial'),
       ],
     );
   }

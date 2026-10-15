@@ -71,9 +71,9 @@ void main() {
     controller.dispose();
   }
 
-  const transitional = <String?>['1', '2', '1', '2', '3', '4', '5'];
-  const six = <String?>['1', '2', '3', '4', '5', '6'];
-  const moto = <String?>['A', '1', '2', '3', '4'];
+  const transitional = <String?>['12', '12345'];
+  const six = <String?>['123456'];
+  const moto = <String?>['A', '1234'];
 
   testWidgets('transitional private', (t) async {
     await golden(
