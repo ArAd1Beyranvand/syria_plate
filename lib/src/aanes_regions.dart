@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-/// A jurisdiction an AANES plate names in its left block: the Jazira Region's
-/// districts, and the other regions of the administration.
-///
-/// The names are the plate's own, not the Damascus government's — قامشلو
-/// (Qamishlo), not القامشلي; كوباني, not عين العرب.
+/// A jurisdiction an AANES plate names in its left block. The names are the
+/// plate's own, not the Damascus government's (قامشلو, not القامشلي).
 @immutable
 class AanesRegion {
   const AanesRegion({
@@ -23,8 +20,8 @@ class AanesRegion {
   /// The three-letter code derived from Kurdish.
   final String code;
 
-  /// The Syriac name, printed by the Jazira districts that have one. A region
-  /// with one gets the trilingual left block, one without the bilingual.
+  /// A region with a Syriac name gets the trilingual left block, one without
+  /// the bilingual.
   final String? syriac;
 
   bool get isTrilingual => syriac != null;

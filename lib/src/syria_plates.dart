@@ -1,26 +1,21 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'aanes_regions.dart';
 import 'syria_alphabets.dart';
 import 'syria_colors.dart';
 import 'syria_country.dart';
 
-/// The transitional government's plate, measured off
-/// `Syria_License_Plate_(2025-).png` by normalising its plate rectangle
-/// (980×210 px) to 520 units wide. The article gives no size in mm, so the
-/// canvas keeps the artwork's 4.67 aspect: 520 × 111.4.
+/// The transitional plate, `NN NNNNN`, normalised from the artwork to 520
+/// units wide. No size in mm is published, so the canvas keeps the artwork's
+/// aspect. Between the groups sit سورية, the flag and SYR; the flag is a
+/// background section and its stars a red label on the white stripe.
 ///
-/// `NN NNNNN`: a two-digit code, then a five-digit serial. Between the groups,
-/// stacked: سورية (ink y 18–34), the flag (x 152.8–203.8, three 10.6-unit
-/// stripes from y 39.3), SYR (ink y 75.9–90.7). The flag is a section of the
-/// background; its stars are a red label on the white stripe.
-///
-/// Reference digit ink is 76 units tall (y 17.5–93.4). Slot ink is ~0.525 of
-/// the box, so that would need a 145-unit box on a 111-unit plate; the box is
-/// the full height and the digits come out ~77% of reference.
+/// Reference digit ink is 76 tall; slot ink is ~0.525 of the box, which would
+/// need a 145 box on a 111 plate, so the box is the full height and the digits
+/// come out ~77% of reference.
 abstract final class _Transitional {
   static const double width = 520;
   static const double height = 111.4;
@@ -34,20 +29,16 @@ abstract final class _Transitional {
   static const double captionX = 178.3;
 }
 
-/// The AANES car plate, measured off the six `AANES_license_plate_-_*.png`
-/// (1040×240 px, normalised to 520 × 120 — again no mm in the article).
+/// The AANES car plate, normalised from the artwork to 520 x 120.
 ///
-/// Four columns split by 2-unit rules edge to edge: the region block
-/// (0–209.75), "SYR" stacked (–259.75), "B ✷ S" stacked (–309.75), and the
-/// number (–520), itself split at y 59.75 into Western digits over Eastern
-/// Arabic. The region block is split at y 41.25 and 78.25 (code / Syriac /
-/// Arabic) when the region has a Syriac name, at 59.75 (code / Arabic) when not.
+/// Four columns split by 2-unit rules: the region block, "SYR" stacked, "B ✷ S"
+/// stacked, and the number, split at [midline] into Western digits over
+/// Eastern Arabic. The region block is split into code / Syriac / Arabic when
+/// the region has a Syriac name, code / Arabic when not.
 ///
-/// Measured ink: digits y 8–53 at pitch 34.1, first centre x 329.8; Eastern
-/// digits y 71–109; stacked caps 24 tall centred y 17.25 / 58.25 / 99.25 at
-/// x 234.75 and 284.75, the sun 30.5 across at y 61.25. The top digit box is
-/// capped at 61 by the plate's top edge, so those digits are ~71% of
-/// reference; the Eastern row is a mirror with its own glyph height and is not.
+/// The top digit box is capped at 61 by the plate's top edge, so those digits
+/// are ~71% of reference; the Eastern row is a mirror with its own glyph
+/// height and is not.
 abstract final class _Aanes {
   static const double width = 520;
   static const double height = 120;
@@ -66,13 +57,10 @@ abstract final class _Aanes {
   static const String sun = '✷';
 }
 
-/// The AANES motorcycle plate, `AANES_license_plate_-_Motorcycle.png`
-/// (523×240 px → 261.5 × 120, the car plate's scale). "B ✷ S" in a column
-/// to x 51.25, then code and Arabic name over a letter and four digits,
-/// split at y 59.75. Measured: code caps y 20–42.5 centred x 101, name
-/// centred (208.5, 31.25), letter A ink 33.5 tall centred x 88, digits 45 tall
-/// at pitch 34.75 from x 108.6. Boxes are capped by the lower cell (58), so
-/// the digits are ~68% of reference; the letter keeps its smaller ratio.
+/// The AANES motorcycle plate at the car plate's scale: "B ✷ S" in a column,
+/// then code and Arabic name over a letter and four digits, split at
+/// [_Aanes.midline]. Boxes are capped by the lower cell (58), so the digits
+/// are ~68% of reference.
 abstract final class _Moto {
   static const double width = 261.5;
   static const double height = 120;
@@ -81,19 +69,16 @@ abstract final class _Moto {
   static const double pitch = 34.75;
 }
 
-/// Syria's current plates. The 1997 series and the opposition-held
-/// territories' plates are historical and not built.
+/// Historical series (1997, opposition-held territories) are not built.
 ///
-/// Colour is not on any spec: [transitional] is private or commercial by
-/// `SyriaThemes.private`/`commercial`; an [aanes] plate by one of the four
-/// `SyriaThemes.aanes*`.
+/// Colour is not on any spec: [transitional] takes `SyriaThemes.private` or
+/// `commercial`; an [aanes] plate one of the four `SyriaThemes.aanes*`.
 abstract final class SyriaPlates {
-  /// The family the Syriac row asks for. Not bundled: the host supplies a
-  /// face under this name, or the row falls back to whatever has the glyphs.
+  /// Not bundled: the host supplies a face under this name, or the row falls
+  /// back to whatever has the glyphs.
   static const String syriacFont = 'Noto Sans Syriac';
 
-  /// One field of [count] cells at [pitch] from [left]; `spacing` brings the
-  /// font's advance up to the pitch.
+  /// `spacing` brings the font's advance up to the pitch.
   static PlateSlot _run(
     PlateAlphabet alphabet,
     int count,
@@ -127,7 +112,6 @@ abstract final class SyriaPlates {
     fontFamily: fontFamily,
   );
 
-  /// `NN NNNNN`, black or maroon by theme.
   static final PlateSpec transitional = () {
     return PlateSpec(
       id: 'sy.transitional',
@@ -220,6 +204,11 @@ abstract final class SyriaPlates {
         _label(c, x, 99.25, 45, w: 46),
       ];
 
+  static const PlateSection _splitAtMidline = PlateSection.rows(<PlatePart>[
+    PlatePart(PlateSection.plain, end: _Aanes.midline, divider: _Aanes.rule),
+    PlatePart(PlateSection.plain),
+  ]);
+
   static PlateSpec _aanesSpec(AanesRegion r) {
     final spaced = r.code.split('').join(' ');
     final region = r.isTrilingual
@@ -228,14 +217,7 @@ abstract final class SyriaPlates {
             PlatePart(PlateSection.plain, end: 78.25, divider: _Aanes.rule),
             PlatePart(PlateSection.plain),
           ])
-        : const PlateSection.rows(<PlatePart>[
-            PlatePart(
-              PlateSection.plain,
-              end: _Aanes.midline,
-              divider: _Aanes.rule,
-            ),
-            PlatePart(PlateSection.plain),
-          ]);
+        : _splitAtMidline;
     return PlateSpec(
       id: 'sy.aanes.${r.id}',
       country: SyriaCountry.syria,
@@ -255,16 +237,7 @@ abstract final class SyriaPlates {
           end: _Aanes.bsEnd,
           divider: _Aanes.rule,
         ),
-        const PlatePart(
-          PlateSection.rows(<PlatePart>[
-            PlatePart(
-              PlateSection.plain,
-              end: _Aanes.midline,
-              divider: _Aanes.rule,
-            ),
-            PlatePart(PlateSection.plain),
-          ]),
-        ),
+        const PlatePart(_splitAtMidline),
       ]),
       slots: <PlateSlot>[
         _run(SyriaAlphabets.digits, 6, _Aanes.digitLeft, 0, _Aanes.pitch, 61),
@@ -317,16 +290,7 @@ abstract final class SyriaPlates {
           end: _Moto.columnEnd,
           divider: _Aanes.rule,
         ),
-        PlatePart(
-          PlateSection.rows(<PlatePart>[
-            PlatePart(
-              PlateSection.plain,
-              end: _Aanes.midline,
-              divider: _Aanes.rule,
-            ),
-            PlatePart(PlateSection.plain),
-          ]),
-        ),
+        PlatePart(_splitAtMidline),
       ]),
       slots: <PlateSlot>[
         const PlateSlot(
@@ -347,7 +311,6 @@ abstract final class SyriaPlates {
     );
   }
 
-  /// One AANES car spec per region, built once.
   static final Map<AanesRegion, PlateSpec> aanesByRegion =
       <AanesRegion, PlateSpec>{
         for (final r in AanesRegion.values) r: _aanesSpec(r),

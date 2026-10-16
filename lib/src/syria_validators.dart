@@ -1,7 +1,7 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Judges a transitional-government plate: a two-digit code and a five-digit
-/// serial. The article publishes no code table, so any two digits pass.
+/// A two-digit code and a five-digit serial; no code table is published, so
+/// any two digits pass.
 class SyriaTransitionalValidator extends GatedPlateValidator {
   const SyriaTransitionalValidator();
 
@@ -29,7 +29,7 @@ class SyriaTransitionalValidator extends GatedPlateValidator {
   }
 }
 
-/// Judges an AANES car plate: six digits, printed twice.
+/// Six digits, printed twice.
 class AanesValidator extends GatedPlateValidator {
   const AanesValidator();
 
@@ -48,7 +48,7 @@ class AanesValidator extends GatedPlateValidator {
       : const PlateValidation.invalid(reasonSerial);
 }
 
-/// Judges an AANES motorcycle plate: one Latin letter and four digits.
+/// One Latin letter and four digits.
 class AanesMotorcycleValidator extends GatedPlateValidator {
   const AanesMotorcycleValidator();
 
@@ -57,6 +57,8 @@ class AanesMotorcycleValidator extends GatedPlateValidator {
 
   static const String reasonLetter = 'A motorcycle plate starts with a letter.';
   static const String reasonSerial = 'The number is four digits.';
+
+  static final RegExp _letter = RegExp(r'^[A-Z]$');
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -68,7 +70,7 @@ class AanesMotorcycleValidator extends GatedPlateValidator {
     required String letter,
     required String serial,
   }) {
-    if (!RegExp(r'^[A-Z]$').hasMatch(letter)) {
+    if (!_letter.hasMatch(letter)) {
       return const PlateValidation.invalid(reasonLetter);
     }
     if (!isDigitsOfLength(serial, 4)) {

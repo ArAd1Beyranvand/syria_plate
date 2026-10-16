@@ -1,16 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-/// Every colour a current Syrian plate is printed in, sampled as the modal
-/// pixel of the Wikimedia artwork (`Syria_License_Plate_(2025-).png`,
-/// `2024-present_Syrian_Commerical_Number_Plate.png`, and the six
-/// `AANES_license_plate_-_*.png`). Colours go into `SyriaThemes`, never into
-/// specs — except the flag's, which do not follow the livery.
+/// Modal pixels of the reference artwork. Colours go into `SyriaThemes`, never
+/// into specs, except the flag's, which do not follow the livery.
 abstract final class SyriaColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
 
-  /// Ink and frame of the transitional commercial plate. A maroon, not the red
-  /// the AANES commercial plate uses.
+  /// Transitional commercial ink and frame; not the AANES red.
   static const Color maroon = Color(0xFF720000);
 
   /// The flag's top stripe.
@@ -25,8 +21,7 @@ abstract final class SyriaColors {
   /// AANES commercial ink.
   static const Color aanesRed = Color(0xFFCB2516);
 
-  /// AANES commercial frame and rules — a hair more orange than its ink, and
-  /// sampled as a distinct value on every rule in the artwork.
+  /// AANES commercial frame and rules, slightly more orange than its ink.
   static const Color aanesRedRule = Color(0xFFCC2200);
 
   /// AANES administrative field.

@@ -3,12 +3,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'syria_colors.dart';
 
-/// Every theme is one ink on one field, with the frame and rules in the ink
-/// (or, on the AANES commercial plate, in a near-identical rule red).
-///
-/// The ratios are measured off the artwork in plate units: the transitional
-/// frame is 4.2 of 111.4 with a 7.4 corner; the AANES frame and rules are 2 of
-/// 120 with a 6 corner.
+/// One ink on one field, with frame and rules in the ink (AANES commercial
+/// uses a near-identical rule red). Ratios are measured off the artwork in
+/// plate units.
 abstract final class SyriaThemes {
   static const double _transitionalBorder = 4.2 / 111.4;
   static const double _transitionalRadius = 7.4 / 111.4;
@@ -35,7 +32,6 @@ abstract final class SyriaThemes {
     alertColor: SyriaColors.alert,
   );
 
-  /// Transitional government, private: black on white.
   static final PlateTheme private = _theme(
     field: SyriaColors.white,
     ink: SyriaColors.black,
@@ -43,7 +39,6 @@ abstract final class SyriaThemes {
     radius: _transitionalRadius,
   );
 
-  /// Transitional government, commercial: maroon on white.
   static final PlateTheme commercial = _theme(
     field: SyriaColors.white,
     ink: SyriaColors.maroon,
@@ -51,7 +46,6 @@ abstract final class SyriaThemes {
     radius: _transitionalRadius,
   );
 
-  /// AANES private: blue on white. Also the motorcycle plate.
   static final PlateTheme aanesPrivate = _theme(
     field: SyriaColors.white,
     ink: SyriaColors.aanesBlue,
@@ -59,7 +53,6 @@ abstract final class SyriaThemes {
     radius: _aanesRadius,
   );
 
-  /// AANES commercial (buses, taxis, trucks): red on white.
   static final PlateTheme aanesCommercial = _theme(
     field: SyriaColors.white,
     ink: SyriaColors.aanesRed,
@@ -68,7 +61,6 @@ abstract final class SyriaThemes {
     radius: _aanesRadius,
   );
 
-  /// AANES security forces (Asayish, Sutoro): white on blue.
   static final PlateTheme aanesSecurity = _theme(
     field: SyriaColors.aanesBlue,
     ink: SyriaColors.white,
@@ -76,8 +68,6 @@ abstract final class SyriaThemes {
     radius: _aanesRadius,
   );
 
-  /// AANES administrative (municipal vehicles, fire engines, ambulances):
-  /// white on green.
   static final PlateTheme aanesAdministrative = _theme(
     field: SyriaColors.aanesGreen,
     ink: SyriaColors.white,
