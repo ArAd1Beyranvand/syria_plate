@@ -112,88 +112,86 @@ abstract final class SyriaPlates {
     fontFamily: fontFamily,
   );
 
-  static final PlateSpec transitional = () {
-    return PlateSpec(
-      id: 'sy.transitional',
-      country: SyriaCountry.syria,
-      canvasWidth: _Transitional.width,
-      canvasHeight: _Transitional.height,
-      noPanel: true,
-      panel: _noPanel,
-      background: const PlateSection.columns(<PlatePart>[
-        PlatePart(PlateSection.plain, end: _Transitional.flagLeft),
-        PlatePart(
-          PlateSection.rows(<PlatePart>[
-            PlatePart(PlateSection.plain, end: _Transitional.flagTop),
-            PlatePart(
-              PlateSection.fill(PlateFill.color(SyriaColors.flagGreen)),
-              end: _Transitional.flagTop + _Transitional.stripe,
-            ),
-            PlatePart(
-              PlateSection.fill(PlateFill.color(SyriaColors.white)),
-              end: _Transitional.flagTop + 2 * _Transitional.stripe,
-            ),
-            PlatePart(
-              PlateSection.fill(PlateFill.color(SyriaColors.black)),
-              end: _Transitional.flagTop + 3 * _Transitional.stripe,
-            ),
-            PlatePart(PlateSection.plain),
-          ]),
-          end: _Transitional.flagRight,
-        ),
-        PlatePart(PlateSection.plain),
-      ]),
-      slots: <PlateSlot>[
-        _run(
-          SyriaAlphabets.digits,
-          2,
-          _Transitional.codeLeft,
-          0,
-          _Transitional.pitch,
-          _Transitional.height,
-        ),
-        _run(
-          SyriaAlphabets.digits,
-          5,
-          _Transitional.serialLeft,
-          0,
-          _Transitional.pitch,
-          _Transitional.height,
-        ),
-      ],
-      labels: <PlateLabel>[
-        _label(
-          'سورية',
-          _Transitional.captionX,
-          22,
-          29,
-          w: 50,
-          color: SyriaColors.black,
-        ),
-        _label(
-          '★ ★ ★',
-          _Transitional.captionX,
-          _Transitional.flagTop + 1.5 * _Transitional.stripe,
-          16.5,
-          w: 50,
-          h: _Transitional.stripe,
-          color: SyriaColors.flagRed,
-        ),
-        _label(
-          'SYR',
-          _Transitional.captionX,
-          83.3,
-          28,
-          w: 50,
-          color: SyriaColors.black,
-        ),
-      ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'code'),
-        PlateTextGroup(<int>[1], key: 'serial'),
-      ],
-    );
-  }();
+  static final PlateSpec transitional = PlateSpec(
+    id: 'sy.transitional',
+    country: SyriaCountry.syria,
+    canvasWidth: _Transitional.width,
+    canvasHeight: _Transitional.height,
+    noPanel: true,
+    panel: _noPanel,
+    background: const PlateSection.columns(<PlatePart>[
+      PlatePart(PlateSection.plain, end: _Transitional.flagLeft),
+      PlatePart(
+        PlateSection.rows(<PlatePart>[
+          PlatePart(PlateSection.plain, end: _Transitional.flagTop),
+          PlatePart(
+            PlateSection.fill(PlateFill.color(SyriaColors.flagGreen)),
+            end: _Transitional.flagTop + _Transitional.stripe,
+          ),
+          PlatePart(
+            PlateSection.fill(PlateFill.color(SyriaColors.white)),
+            end: _Transitional.flagTop + 2 * _Transitional.stripe,
+          ),
+          PlatePart(
+            PlateSection.fill(PlateFill.color(SyriaColors.black)),
+            end: _Transitional.flagTop + 3 * _Transitional.stripe,
+          ),
+          PlatePart(PlateSection.plain),
+        ]),
+        end: _Transitional.flagRight,
+      ),
+      PlatePart(PlateSection.plain),
+    ]),
+    slots: <PlateSlot>[
+      _run(
+        SyriaAlphabets.digits,
+        2,
+        _Transitional.codeLeft,
+        0,
+        _Transitional.pitch,
+        _Transitional.height,
+      ),
+      _run(
+        SyriaAlphabets.digits,
+        5,
+        _Transitional.serialLeft,
+        0,
+        _Transitional.pitch,
+        _Transitional.height,
+      ),
+    ],
+    labels: <PlateLabel>[
+      _label(
+        'سورية',
+        _Transitional.captionX,
+        22,
+        29,
+        w: 50,
+        color: SyriaColors.black,
+      ),
+      _label(
+        '★ ★ ★',
+        _Transitional.captionX,
+        _Transitional.flagTop + 1.5 * _Transitional.stripe,
+        16.5,
+        w: 50,
+        h: _Transitional.stripe,
+        color: SyriaColors.flagRed,
+      ),
+      _label(
+        'SYR',
+        _Transitional.captionX,
+        83.3,
+        28,
+        w: 50,
+        color: SyriaColors.black,
+      ),
+    ],
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'code'),
+      PlateTextGroup(<int>[1], key: 'serial'),
+    ],
+  );
 
   static List<PlateLabel> _stack(double x, String a, String b, String c) =>
       <PlateLabel>[
@@ -276,40 +274,34 @@ abstract final class SyriaPlates {
     );
   }
 
-  static PlateSpec _motoSpec(AanesRegion r) {
-    return PlateSpec(
-      id: 'sy.aanes.motorcycle.${r.id}',
-      country: SyriaCountry.syria,
-      canvasWidth: _Moto.width,
-      canvasHeight: _Moto.height,
-      noPanel: true,
-      panel: _noPanel,
-      background: const PlateSection.columns(<PlatePart>[
-        PlatePart(
-          PlateSection.plain,
-          end: _Moto.columnEnd,
-          divider: _Aanes.rule,
-        ),
-        PlatePart(_splitAtMidline),
-      ]),
-      slots: <PlateSlot>[
-        const PlateSlot(
-          alphabet: SyriaAlphabets.letters,
-          box: PlateBox(71, 69.5, 34, 43),
-        ),
-        _run(SyriaAlphabets.digits, 4, 108.6, 62, _Moto.pitch, 58),
-      ],
-      labels: <PlateLabel>[
-        ..._stack(_Moto.bsX, 'B', _Aanes.sun, 'S'),
-        _label(r.code, 101, 31.25, 43, w: 90, h: 40),
-        _label(r.arabic, 208.5, 31.25, 34, w: 96, h: 40),
-      ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'letter'),
-        PlateTextGroup(<int>[1], key: 'serial'),
-      ],
-    );
-  }
+  static PlateSpec _motoSpec(AanesRegion r) => PlateSpec(
+    id: 'sy.aanes.motorcycle.${r.id}',
+    country: SyriaCountry.syria,
+    canvasWidth: _Moto.width,
+    canvasHeight: _Moto.height,
+    noPanel: true,
+    panel: _noPanel,
+    background: const PlateSection.columns(<PlatePart>[
+      PlatePart(PlateSection.plain, end: _Moto.columnEnd, divider: _Aanes.rule),
+      PlatePart(_splitAtMidline),
+    ]),
+    slots: <PlateSlot>[
+      const PlateSlot(
+        alphabet: SyriaAlphabets.letters,
+        box: PlateBox(71, 69.5, 34, 43),
+      ),
+      _run(SyriaAlphabets.digits, 4, 108.6, 62, _Moto.pitch, 58),
+    ],
+    labels: <PlateLabel>[
+      ..._stack(_Moto.bsX, 'B', _Aanes.sun, 'S'),
+      _label(r.code, 101, 31.25, 43, w: 90, h: 40),
+      _label(r.arabic, 208.5, 31.25, 34, w: 96, h: 40),
+    ],
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'letter'),
+      PlateTextGroup(<int>[1], key: 'serial'),
+    ],
+  );
 
   static final Map<AanesRegion, PlateSpec> aanesByRegion =
       <AanesRegion, PlateSpec>{
