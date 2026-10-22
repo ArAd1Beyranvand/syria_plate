@@ -25,24 +25,15 @@ void main() {
   group('validators', () {
     test('transitional', () {
       expect(
-        SyriaTransitionalValidator.validateFields(
-          code: '12',
-          serial: '12345',
-        ).isValid,
+        SyriaTransitionalValidator.validateFields(code: '12', serial: '12345').isValid,
         isTrue,
       );
       expect(
-        SyriaTransitionalValidator.validateFields(
-          code: '1',
-          serial: '12345',
-        ).isValid,
+        SyriaTransitionalValidator.validateFields(code: '1', serial: '12345').isValid,
         isFalse,
       );
       expect(
-        SyriaTransitionalValidator.validateFields(
-          code: '12',
-          serial: '1234',
-        ).isValid,
+        SyriaTransitionalValidator.validateFields(code: '12', serial: '1234').isValid,
         isFalse,
       );
     });
@@ -53,20 +44,8 @@ void main() {
     });
 
     test('motorcycle', () {
-      expect(
-        AanesMotorcycleValidator.validateFields(
-          letter: 'A',
-          serial: '1234',
-        ).isValid,
-        isTrue,
-      );
-      expect(
-        AanesMotorcycleValidator.validateFields(
-          letter: '1',
-          serial: '1234',
-        ).isValid,
-        isFalse,
-      );
+      expect(AanesMotorcycleValidator.validateFields(letter: 'A', serial: '1234').isValid, isTrue);
+      expect(AanesMotorcycleValidator.validateFields(letter: '1', serial: '1234').isValid, isFalse);
     });
   });
 }

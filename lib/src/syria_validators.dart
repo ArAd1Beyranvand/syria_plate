@@ -15,10 +15,7 @@ class SyriaTransitionalValidator extends GatedPlateValidator {
   PlateValidation judge(PlateEntry entry) =>
       validateFields(code: entry.group('code'), serial: entry.group('serial'));
 
-  static PlateValidation validateFields({
-    required String code,
-    required String serial,
-  }) {
+  static PlateValidation validateFields({required String code, required String serial}) {
     if (!isDigitsOfLength(code, 2)) {
       return const PlateValidation.invalid(reasonCode);
     }
@@ -39,11 +36,9 @@ class AanesValidator extends GatedPlateValidator {
   static const String reasonSerial = 'The number is six digits.';
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      validateFields(serial: entry.group('serial'));
+  PlateValidation judge(PlateEntry entry) => validateFields(serial: entry.group('serial'));
 
-  static PlateValidation validateFields({required String serial}) =>
-      isDigitsOfLength(serial, 6)
+  static PlateValidation validateFields({required String serial}) => isDigitsOfLength(serial, 6)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid(reasonSerial);
 }
@@ -61,15 +56,10 @@ class AanesMotorcycleValidator extends GatedPlateValidator {
   static final RegExp _letter = RegExp(r'^[A-Z]$');
 
   @override
-  PlateValidation judge(PlateEntry entry) => validateFields(
-    letter: entry.group('letter'),
-    serial: entry.group('serial'),
-  );
+  PlateValidation judge(PlateEntry entry) =>
+      validateFields(letter: entry.group('letter'), serial: entry.group('serial'));
 
-  static PlateValidation validateFields({
-    required String letter,
-    required String serial,
-  }) {
+  static PlateValidation validateFields({required String letter, required String serial}) {
     if (!_letter.hasMatch(letter)) {
       return const PlateValidation.invalid(reasonLetter);
     }

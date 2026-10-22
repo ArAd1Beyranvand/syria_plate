@@ -161,14 +161,7 @@ abstract final class SyriaPlates {
       ),
     ],
     labels: <PlateLabel>[
-      _label(
-        'سورية',
-        _Transitional.captionX,
-        22,
-        29,
-        w: 50,
-        color: SyriaColors.black,
-      ),
+      _label('سورية', _Transitional.captionX, 22, 29, w: 50, color: SyriaColors.black),
       _label(
         '★ ★ ★',
         _Transitional.captionX,
@@ -178,14 +171,7 @@ abstract final class SyriaPlates {
         h: _Transitional.stripe,
         color: SyriaColors.flagRed,
       ),
-      _label(
-        'SYR',
-        _Transitional.captionX,
-        83.3,
-        28,
-        w: 50,
-        color: SyriaColors.black,
-      ),
+      _label('SYR', _Transitional.captionX, 83.3, 28, w: 50, color: SyriaColors.black),
     ],
     textGroups: const <PlateTextGroup>[
       PlateTextGroup(<int>[0], key: 'code'),
@@ -193,14 +179,11 @@ abstract final class SyriaPlates {
     ],
   );
 
-  static List<PlateLabel> _stack(double x, String a, String b, String c) =>
-      <PlateLabel>[
-        _label(a, x, 17.25, 45, w: 46),
-        b == _Aanes.sun
-            ? _label(b, x, 55, 66, w: 46)
-            : _label(b, x, 58.25, 45, w: 46),
-        _label(c, x, 99.25, 45, w: 46),
-      ];
+  static List<PlateLabel> _stack(double x, String a, String b, String c) => <PlateLabel>[
+    _label(a, x, 17.25, 45, w: 46),
+    b == _Aanes.sun ? _label(b, x, 55, 66, w: 46) : _label(b, x, 58.25, 45, w: 46),
+    _label(c, x, 99.25, 45, w: 46),
+  ];
 
   static const PlateSection _splitAtMidline = PlateSection.rows(<PlatePart>[
     PlatePart(PlateSection.plain, end: _Aanes.midline, divider: _Aanes.rule),
@@ -225,27 +208,17 @@ abstract final class SyriaPlates {
       panel: _noPanel,
       background: PlateSection.columns(<PlatePart>[
         PlatePart(region, end: _Aanes.regionEnd, divider: _Aanes.rule),
-        const PlatePart(
-          PlateSection.plain,
-          end: _Aanes.syrEnd,
-          divider: _Aanes.rule,
-        ),
-        const PlatePart(
-          PlateSection.plain,
-          end: _Aanes.bsEnd,
-          divider: _Aanes.rule,
-        ),
+        const PlatePart(PlateSection.plain, end: _Aanes.syrEnd, divider: _Aanes.rule),
+        const PlatePart(PlateSection.plain, end: _Aanes.bsEnd, divider: _Aanes.rule),
         const PlatePart(_splitAtMidline),
       ]),
-      slots: <PlateSlot>[
-        _run(SyriaAlphabets.digits, 6, _Aanes.digitLeft, 0, _Aanes.pitch, 61),
-      ],
+      slots: <PlateSlot>[_run(SyriaAlphabets.digits, 6, _Aanes.digitLeft, 0, _Aanes.pitch, 61)],
       mirrors: const <PlateMirror>[
         PlateMirror(
           source: 0,
           box: PlateBox(_Aanes.digitLeft, 58.7, 6 * _Aanes.pitch, 59),
           glyphHeight: 70,
-          alphabet: SyriaAlphabets.easternDigits,
+          alphabet: SyriaAlphabets.iranshahrDigits,
         ),
       ],
       labels: <PlateLabel>[
@@ -253,15 +226,7 @@ abstract final class SyriaPlates {
         ..._stack(_Aanes.bsX, 'B', _Aanes.sun, 'S'),
         if (r.isTrilingual) ...<PlateLabel>[
           _label(spaced, _Aanes.regionX, 19.75, 45, w: 190, h: 36),
-          _label(
-            r.syriac!,
-            _Aanes.regionX,
-            60,
-            36,
-            w: 190,
-            h: 34,
-            fontFamily: syriacFont,
-          ),
+          _label(r.syriac!, _Aanes.regionX, 60, 36, w: 190, h: 34, fontFamily: syriacFont),
           _label(r.arabic, _Aanes.regionX, 98.5, 40, w: 190, h: 38),
         ] else ...<PlateLabel>[
           _label(spaced, _Aanes.regionX, 32, 80, w: 190, h: 56),
@@ -286,10 +251,7 @@ abstract final class SyriaPlates {
       PlatePart(_splitAtMidline),
     ]),
     slots: <PlateSlot>[
-      const PlateSlot(
-        alphabet: SyriaAlphabets.letters,
-        box: PlateBox(71, 69.5, 34, 43),
-      ),
+      const PlateSlot(alphabet: SyriaAlphabets.letters, box: PlateBox(71, 69.5, 34, 43)),
       _run(SyriaAlphabets.digits, 4, 108.6, 62, _Moto.pitch, 58),
     ],
     labels: <PlateLabel>[
@@ -303,19 +265,16 @@ abstract final class SyriaPlates {
     ],
   );
 
-  static final Map<AanesRegion, PlateSpec> aanesByRegion =
-      <AanesRegion, PlateSpec>{
-        for (final r in AanesRegion.values) r: _aanesSpec(r),
-      };
+  static final Map<AanesRegion, PlateSpec> aanesByRegion = <AanesRegion, PlateSpec>{
+    for (final r in AanesRegion.values) r: _aanesSpec(r),
+  };
 
-  static final Map<AanesRegion, PlateSpec> motorcycleByRegion =
-      <AanesRegion, PlateSpec>{
-        for (final r in AanesRegion.values) r: _motoSpec(r),
-      };
+  static final Map<AanesRegion, PlateSpec> motorcycleByRegion = <AanesRegion, PlateSpec>{
+    for (final r in AanesRegion.values) r: _motoSpec(r),
+  };
 
   static PlateSpec aanes(AanesRegion region) => aanesByRegion[region]!;
-  static PlateSpec motorcycle(AanesRegion region) =>
-      motorcycleByRegion[region]!;
+  static PlateSpec motorcycle(AanesRegion region) => motorcycleByRegion[region]!;
 
   static List<PlateSpec> get all => <PlateSpec>[
     transitional,
