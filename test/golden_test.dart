@@ -27,8 +27,9 @@ void main() {
     final syriac = File('../.plateref/fonts/NotoSansSyriac.ttf');
     if (syriac.existsSync()) {
       await (FontLoader(
-        SyriaPlates.syriacFont,
-      )..addFont(syriac.readAsBytes().then((b) => ByteData.view(b.buffer)))).load();
+            SyriaPlates.syriacFont,
+          )..addFont(syriac.readAsBytes().then((b) => ByteData.view(b.buffer))))
+          .load();
     }
   });
 
@@ -50,7 +51,11 @@ void main() {
               height: 2 * spec.canvasHeight,
               child: PlateThemeScope(
                 theme: theme,
-                child: PlateView(controller: controller, theme: theme, country: SyriaCountry.syria),
+                child: PlateView(
+                  controller: controller,
+                  theme: theme,
+                  country: SyriaCountry.syria,
+                ),
               ),
             ),
           ),
@@ -58,7 +63,10 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
+    await expectLater(
+      find.byType(PlateView),
+      matchesGoldenFile('goldens/$name.png'),
+    );
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -68,7 +76,13 @@ void main() {
   const moto = <String?>['A', '1234'];
 
   testWidgets('transitional private', (t) async {
-    await golden(t, SyriaPlates.transitional, SyriaThemes.private, transitional, 'sy_private');
+    await golden(
+      t,
+      SyriaPlates.transitional,
+      SyriaThemes.private,
+      transitional,
+      'sy_private',
+    );
   });
   testWidgets('transitional commercial', (t) async {
     await golden(
