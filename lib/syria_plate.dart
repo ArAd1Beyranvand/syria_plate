@@ -2,6 +2,9 @@
 /// transitional government's plate and the AANES plates.
 library;
 
+// TODO(py): [D5] one module `plates.countries.syria`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/syria`; tree-shakable.
+// TODO(kt): [D5] package `countries.syria` in the countries module.
 export 'src/aanes_regions.dart';
 export 'src/syria_alphabets.dart';
 export 'src/syria_colors.dart';
