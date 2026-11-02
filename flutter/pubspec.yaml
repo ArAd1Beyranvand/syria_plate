@@ -1,7 +1,7 @@
 name: syria_plate
 description: "Syria's current licence plates for plate_core: the transitional government plate and the AANES trilingual, bilingual and motorcycle plates, with themes and a validator."
 version: 0.1.0
-repository: https://github.com/ArAd1Beyranvand/syria_plate
+repository: https://github.com/ArAd1Beyranvand/syria_plate/tree/main/flutter
 resolution: workspace
 
 environment:
