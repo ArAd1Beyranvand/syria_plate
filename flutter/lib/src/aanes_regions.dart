@@ -13,9 +13,7 @@ class AanesRegion {
   });
 
   /// Stable key, used in spec ids.
-  final String id;
-  final String english;
-  final String arabic;
+  final String id, english, arabic;
 
   /// The three-letter code derived from Kurdish.
   final String code;

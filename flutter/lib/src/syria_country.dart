@@ -7,7 +7,6 @@ import 'syria_colors.dart';
 abstract final class SyriaCountry {
   static const PlateCountry syria = PlateCountry(
     code: 'sy',
-    captionLines: <String>[],
     panelColor: SyriaColors.white,
     panelTextColor: SyriaColors.black,
   );

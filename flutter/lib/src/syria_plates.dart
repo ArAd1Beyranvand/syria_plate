@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -17,15 +15,9 @@ import 'syria_country.dart';
 /// need a 145 box on a 111 plate, so the box is the full height and the digits
 /// come out ~77% of reference.
 abstract final class _Transitional {
-  static const double width = 520;
-  static const double height = 111.4;
-  static const double pitch = 55.2;
-  static const double codeLeft = 22.8;
-  static const double serialLeft = 218.6;
-  static const double flagLeft = 152.8;
-  static const double flagRight = 203.8;
-  static const double flagTop = 39.3;
-  static const double stripe = 10.6;
+  static const double width = 520, height = 111.4, pitch = 55.2;
+  static const double codeLeft = 22.8, serialLeft = 218.6, flagLeft = 152.8;
+  static const double flagRight = 203.8, flagTop = 39.3, stripe = 10.6;
   static const double captionX = 178.3;
 }
 
@@ -40,18 +32,10 @@ abstract final class _Transitional {
 /// are ~71% of reference; the Eastern row is a mirror with its own glyph
 /// height and is not.
 abstract final class _Aanes {
-  static const double width = 520;
-  static const double height = 120;
-  static const double rule = 2;
-  static const double regionEnd = 209.75;
-  static const double syrEnd = 259.75;
-  static const double bsEnd = 309.75;
-  static const double midline = 59.75;
-  static const double syrX = 234.75;
-  static const double bsX = 284.75;
-  static const double regionX = 104;
-  static const double digitLeft = 312.8;
-  static const double pitch = 34.1;
+  static const double width = 520, height = 120, rule = 2, regionEnd = 209.75;
+  static const double syrEnd = 259.75, bsEnd = 309.75, midline = 59.75;
+  static const double syrX = 234.75, bsX = 284.75, regionX = 104;
+  static const double digitLeft = 312.8, pitch = 34.1;
 
   /// The plate's own Kurdish sun, as the nearest glyph a font carries.
   static const String sun = '✷';
@@ -62,11 +46,8 @@ abstract final class _Aanes {
 /// [_Aanes.midline]. Boxes are capped by the lower cell (58), so the digits
 /// are ~68% of reference.
 abstract final class _Moto {
-  static const double width = 261.5;
-  static const double height = 120;
-  static const double columnEnd = 51.25;
-  static const double bsX = 25.75;
-  static const double pitch = 34.75;
+  static const double width = 261.5, height = 120, columnEnd = 51.25;
+  static const double bsX = 25.75, pitch = 34.75;
 }
 
 /// Historical series (1997, opposition-held territories) are not built.
@@ -86,11 +67,13 @@ abstract final class SyriaPlates {
     double top,
     double pitch,
     double height,
-  ) => PlateSlot(
-    alphabet: alphabet,
-    box: PlateBox(left, top, count * pitch, height),
-    length: count,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  ) => plateRun(
+    alphabet,
+    count,
+    left: left,
+    top: top,
+    pitch: pitch,
+    height: height,
   );
 
   static const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 0, 1));
@@ -106,7 +89,7 @@ abstract final class SyriaPlates {
     String? fontFamily,
   }) => PlateLabel(
     text: text,
-    box: PlateBox(cx - w / 2, cy - h / 2, w, h),
+    box: PlateBox.centered(cx, cy, w, h),
     glyphHeight: glyphHeight,
     color: color,
     fontFamily: fontFamily,
@@ -187,10 +170,7 @@ abstract final class SyriaPlates {
         color: SyriaColors.black,
       ),
     ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'code'),
-      PlateTextGroup(<int>[1], key: 'serial'),
-    ],
+    textGroups: PlateTextGroup.perSlot(<String>['code', 'serial']),
   );
 
   static List<PlateLabel> _stack(double x, String a, String b, String c) =>
@@ -297,10 +277,7 @@ abstract final class SyriaPlates {
       _label(r.code, 101, 31.25, 43, w: 90, h: 40),
       _label(r.arabic, 208.5, 31.25, 34, w: 96, h: 40),
     ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'letter'),
-      PlateTextGroup(<int>[1], key: 'serial'),
-    ],
+    textGroups: PlateTextGroup.perSlot(<String>['letter', 'serial']),
   );
 
   static final Map<AanesRegion, PlateSpec> aanesByRegion =

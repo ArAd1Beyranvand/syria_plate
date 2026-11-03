@@ -8,8 +8,7 @@ import 'syria_colors.dart';
 /// plate units.
 abstract final class SyriaThemes {
   static const double _transitionalBorder = 4.2 / 111.4;
-  static const double _transitionalRadius = 7.4 / 111.4;
-  static const double _aanesBorder = 2 / 120;
+  static const double _transitionalRadius = 7.4 / 111.4, _aanesBorder = 2 / 120;
   static const double _aanesRadius = 6 / 120;
 
   static PlateTheme _theme({
